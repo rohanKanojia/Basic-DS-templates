@@ -13,12 +13,12 @@ class MinHeap {
   int getParentIndex(int childIndex)       { return (childIndex-1)/2;  }
   bool hasLeftChild(int index)             { return getLeftChildIndex(index) < size; }
   bool hasRightChild(int index)            { return getRightChildIndex(index) < size; }
-  bool hasParent(int index)                { return getParentIndex(index) < size; }
-  int leftChild(int index)                 { return items[getLeftChildIndex(index)]; }
-  int rightChild(int index)                { return items[getRightChildIndex(index)]; }
-  int parent(int index)                    { return items[getParentIndex(index)]; }
+  bool hasParent(int index)                { return getParentIndex(index) >= size; }
+  T leftChild(int index)                   { return items[getLeftChildIndex(index)]; }
+  T rightChild(int index)                  { return items[getRightChildIndex(index)]; }
+  T parent(int index)                      { return items[getParentIndex(index)]; }
   void swap(int indexOne, int indexTwo) {
-    int tmp = items[indexOne];
+    T tmp = items[indexOne];
     items[indexOne] = items[indexTwo];
     items[indexTwo] = tmp;
   }
