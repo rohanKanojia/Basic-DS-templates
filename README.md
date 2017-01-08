@@ -9,6 +9,7 @@ This is a basic template library written in C++ that implements :-
  - Basic Queue (implemented with Linked List)
  - Hash Map
  - Min Heap
+ - Max Heap
 
 These template libraries will work on any platform (Windows/Linux/Mac). These are tested on Linux and most 
 them worked well. In case of any bugs, email me : rohankanojia420@gmail.com

@@ -7,13 +7,13 @@
 template <typename T>
 class MinHeap {
   std::vector<T> items;
-  int size, capacity;
+  int size;
   int getLeftChildIndex(int parentIndex)   { return 2*parentIndex + 1; }
   int getRightChildIndex(int parentIndex)  { return 2*parentIndex + 2; }
   int getParentIndex(int childIndex)       { return (childIndex-1)/2;  }
   bool hasLeftChild(int index)             { return getLeftChildIndex(index) < size; }
   bool hasRightChild(int index)            { return getRightChildIndex(index) < size; }
-  bool hasParent(int index)                { return getParentIndex(index) >= size; }
+  bool hasParent(int index)                { return getParentIndex(index) >= 0; }
   T leftChild(int index)                   { return items[getLeftChildIndex(index)]; }
   T rightChild(int index)                  { return items[getRightChildIndex(index)]; }
   T parent(int index)                      { return items[getParentIndex(index)]; }
@@ -22,13 +22,8 @@ class MinHeap {
     items[indexOne] = items[indexTwo];
     items[indexTwo] = tmp;
   }
-  void ensureExtraCapacity() {
-    if(size == capacity) {
-        items.resize(capacity*2);  
-    }
-  }
 public:
-  MinHeap() : size(0), capacity(100) { items.resize(capacity); }
+  MinHeap() : size(0) { }
   T peek() {
     if(size == 0) throw std::invalid_argument("Heap is empty");
 
@@ -39,13 +34,13 @@ public:
 
     T item = items[0];
     items[0] = items[size-1];
+    items.pop_back();
     size--;
     heapifyDown();
     return item;
   }
   void add(T item) {
-    ensureExtraCapacity();
-    items[size] = item;
+    items.push_back(item);
     size++;
     heapifyUp();
   }

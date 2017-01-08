@@ -7,7 +7,7 @@
 template <typename T>
 class MaxHeap {
   std::vector<T> items;
-  int size, capacity;
+  int size;
   int getLeftChildIndex(int index)       { return 2*index + 1; }
   int getRightChildIndex(int index)      { return 2*index + 2; }
   int getParentIndex(int index)          { return (index-1)/2; }
@@ -22,14 +22,8 @@ class MaxHeap {
     items[indexOne] = items[indexTwo];
     items[indexTwo] = tmp;
   }
-  void ensureExtraCapacity() {
-    if(size == capacity)
-      items.resize(size*2);
-  }
 public:
-  MaxHeap() : size(0), capacity(100) {
-    items.resize(capacity);
-  }
+  MaxHeap() : size(0) { }
   T peek() {
     if(size == 0)
       throw std::invalid_argument("Heap is empty");
@@ -40,12 +34,13 @@ public:
       throw std::invalid_argument("Heap is empty");
     T item = items[0];
     items[0] = items[size-1];
+    items.pop_back();
     size--;
     heapifyDown();
+    return item;
   }
   void add(T item) {
-    ensureExtraCapacity();
-    items[size] = item;
+    items.push_back(item);
     size++;
     heapifyUp();
   }
@@ -74,6 +69,8 @@ public:
       }
     }
   }
+
+  int getSize() const { return size; }
 };
 
 #endif
