@@ -22,5 +22,7 @@ int main() {
   std::cout << "Mirror created ...\n";
   std::cout << "Mirror :------------------------------->\n";
   cc.traversePreorder();
+  int nDiameter = cc.getDiameter();
+  std::cout << "nDiameter : " << cc.getDiameter() << std::endl;
   return 0;
 }

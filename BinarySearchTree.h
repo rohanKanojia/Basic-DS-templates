@@ -61,6 +61,8 @@ public:
   void destroyTree();
   void copyTree(Node<T> *curNode);
   void swapChildren(Node<T> *curNode);
+  int getDiameter();
+  int getDiameterUtil(Node<T> *curNode, int& diameter);
   Node<T> *lowestcommonAncestor(T e1, T e2);
 };
 

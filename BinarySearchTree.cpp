@@ -265,3 +265,23 @@ Node<T> *BinarySearchTree<T>::lowestcommonAncestor(T e1, T e2) {
   }
   return curNode;
 }
+
+template <typename T>
+int BinarySearchTree<T>::getDiameter() {
+  int diameter = 0;
+  getDiameterUtil(root, diameter);
+  return diameter;
+}
+
+template <typename T>
+int BinarySearchTree<T>::getDiameterUtil(Node<T> *curNode, int& diameter) {
+  int nLeft, nRight;
+  if(!curNode)
+    return 0;
+  nLeft = getDiameterUtil(curNode->getLeft(), diameter);
+  nRight = getDiameterUtil(curNode->getRight(), diameter);
+  
+  if(nLeft + nRight > diameter)
+    diameter = nLeft + nRight+1;
+  return std::max(nLeft, nRight) + 1;
+}
